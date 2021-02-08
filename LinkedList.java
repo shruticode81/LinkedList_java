@@ -53,6 +53,37 @@ public class LinkedList{
 		newNode.next = temp.next;
 		temp.next = newNode;
 	}
+
+	// delete a node at position pos and return the head of the resultant LL
+	public static Node<Integer> delete(Node<Integer> head, int pos){
+		//case 1 if head is null 
+		if(head == null){
+			return null;
+		}
+		//case 2 if pos==0 delete 1st element
+		if(pos ==0){
+			head = head.next;
+			return head;
+		}
+		//case3 delete pos == len -1 i.e delete last node
+		int len = length(head);
+		if(pos==len-1){
+			Node<Integer> temp = head;
+			while(temp.next.next!=null){
+				temp= temp.next;
+			}
+			temp.next = null;
+			return head;
+		}
+		//case4 deleting from middle node
+		int i=0;
+		Node<Integer> temp = head;
+		while(i<pos-1){
+			temp = temp.next;
+		}
+		temp.next = temp.next.next;
+		return head;
+	}
 	public static int length(Node<Integer> head){
 		Node<Integer> temp = head;
 		int count=0;
@@ -64,8 +95,9 @@ public class LinkedList{
 	}
 	public static void main(String[] args){
 		Node<Integer> head=takeInput();
-		insert(head,80,3);
-		print(head);
+		Node<Integer> head1 = delete(head,1);
+		//insert(head,80,3);
+		print(head1);
 		System.out.println(length(head));
 	}
 }
