@@ -7,7 +7,7 @@ public class LinkedList{
 		Scanner s = new Scanner(System.in);
 		int data = s.nextInt();
 		Node<Integer> head = null,tail = null;
-		while(data != -2){
+		while(data != -1){
 			Node<Integer> newNode = new Node<Integer>(data);
 			if(head==null){
 				head = newNode;
@@ -35,11 +35,28 @@ public class LinkedList{
 		System.out.println();
 
 	}
-
+	
+	//Insert node in the linkedlist on a specific position
+	public static void insert(Node<Integer> head,int data,int pos){
+		Node<Integer> newNode = new Node<>(data);
+		int i=0;
+		if(pos==0){
+			newNode.next = head;
+			head = newNode;
+			return;
+		}
+		Node<Integer> temp = head;
+		while(i<pos-1){
+			temp=temp.next;
+			i++;
+		}
+		newNode.next = temp.next;
+		temp.next = newNode;
+	}
 	public static int length(Node<Integer> head){
 		Node<Integer> temp = head;
 		int count=0;
-		while(temp.data!=-1){
+		while(temp!=null){
 			count++;
 			temp = temp.next;
 		}
@@ -47,6 +64,7 @@ public class LinkedList{
 	}
 	public static void main(String[] args){
 		Node<Integer> head=takeInput();
+		insert(head,80,3);
 		print(head);
 		System.out.println(length(head));
 	}
