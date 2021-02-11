@@ -26,6 +26,38 @@ public class ReversePrint{
 		}
 		return head;
 	}
+	public static int length(Node<Integer> head){
+		int count=0;
+		while(head!=null){
+			count++;
+			head=head.next;
+		}
+		return count;
+	}
+	private static Node<Integer> getNode(Node<Integer> head,int index){
+		Node<Integer> temp = head;
+		for(int i=0;i<index;i++){
+			temp= temp.next;
+		}
+		return temp;
+	}
+	
+	public static Node<Integer> reverseIterative(Node<Integer> head){
+		int li=0;
+		int ri = length(head)-1;
+		while(li<ri){
+			Node<Integer> left = getNode(head,li);
+			Node<Integer> right = getNode(head,ri);
+			int temp = left.data;
+			left.data=right.data;
+			right.data = temp;
+			
+			li++;
+			ri--;
+		}
+		return head;
+	} 
+	// reverse iteratively
 	public static void reverseLL(Node<Integer> head){
 		//base case if head==null
 		if(head==null){
@@ -34,8 +66,30 @@ public class ReversePrint{
 		reverseLL(head.next);
 		System.out.print(head.data+" ");
 	}
+	//reverse using changing links using pointers
+	public static Node<Integer> reversePointer(Node<Integer> head){
+		Node<Integer> current = head;
+		Node<Integer> previous = null;
+		Node<Integer> next = null;
+		while(current!=null){
+			next = current.next;
+			current.next = previous;
+			previous = current;
+			current = next;
+		}
+		return previous;
+	}
+	public static void print(Node<Integer> head){
+		while(head!=null){
+			System.out.print(head.data+" ");
+			head=head.next;
+		}
+	}
 	public static void main(String[] args){
 		Node<Integer> head = takeInput();
-		reverseLL(head);
+		//Node<Integer> head1=reverseIterative(head);
+		Node<Integer> head1=reversePointer(head);
+		print(head1);
+		//reverseLL(head);
 	}
 }
