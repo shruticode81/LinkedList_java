@@ -79,6 +79,29 @@ public class ReversePrint{
 		}
 		return previous;
 	}
+	//reverse the LL using recursion in data point
+	private static Node<Integer> reverseRecursiveH(Node<Integer> right,int floor){
+		Node<Integer> head = right;
+		//base case 
+		if(right==null){
+			return right;
+		}
+		reverseRecursiveH(right.next,floor+1);
+		if(floor>=length(head)/2){
+			int temp = rleft.data;
+			rleft.data = right.data;
+			right.data = temp;
+			rleft = rleft.next;
+		}
+		return head;
+	}
+	static Node<Integer> rleft;
+	public static void reverseRecursive(Node<Integer> head){
+		rleft=head;
+		Node<Integer> head1= reverseRecursiveH(head,0);
+		print(head1);
+
+	}
 	public static void print(Node<Integer> head){
 		while(head!=null){
 			System.out.print(head.data+" ");
@@ -88,8 +111,9 @@ public class ReversePrint{
 	public static void main(String[] args){
 		Node<Integer> head = takeInput();
 		//Node<Integer> head1=reverseIterative(head);
-		Node<Integer> head1=reversePointer(head);
-		print(head1);
+		//Node<Integer> head1=reversePointer(head);
+		reverseRecursive(head);
+		//print(head1);
 		//reverseLL(head);
 	}
 }
